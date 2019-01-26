@@ -1,0 +1,22 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  faas-collections:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: 'update forked github repo to latest version'
+    update-forked-repo:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: index.handler
+        Runtime: nodejs8
+        CodeUri: './'
+        EnvironmentVariables:
+          'GITHUB_TOKEN': '${GITHUB_TOKEN}'
+      Events:
+        TmTrigger:
+          Type: Timer
+          Properties: 
+            Payload: "timer"
+            CronExpression: "0 0 0,11 * * *"
+            Enable: true
