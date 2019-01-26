@@ -11,7 +11,7 @@ Resources:
         Handler: index.handler
         Runtime: nodejs8
         CodeUri: './'
-        Timeout: 10
+        Timeout: 20
         EnvironmentVariables:
           'GITHUB_TOKEN': 'env[GITHUB_TOKEN]'
       Events:
