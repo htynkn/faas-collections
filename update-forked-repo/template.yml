@@ -1,5 +1,5 @@
-ROSTemplateFormatVersion: '2undefined15-undefined9-undefined1'
-Transform: 'Aliyun::Serverless-2undefined18-04-03'
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
 Resources:
   faas-collections:
     Type: 'Aliyun::Serverless::Service'
