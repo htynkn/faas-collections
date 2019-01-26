@@ -1,10 +1,7 @@
 var request = require("request");
 var async = require("async")
 
-var targets = { 
-    "diamondblack/spring-boot": "spring-projects/spring-boot",
-    "diamondblack/incubator-dubbo": "apache/incubator-dubbo",
-    "diamondblack/incubator-openwhisk": "apache/incubator-openwhisk",
+var targets = {
     "htynkn/dubbo-benchmark": "dubbo/dubbo-benchmark",
     "htynkn/spark": "apache/spark",
     "htynkn/incubator-dubbo": "apache/incubator-dubbo",
