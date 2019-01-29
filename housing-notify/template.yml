@@ -11,3 +11,5 @@ Resources:
         Handler: com.huangyunkun.faas.App::handleRequest
         Runtime: java8
         CodeUri: './target/housing-notify-1.0-SNAPSHOT-jar-with-dependencies.jar'
+        MemorySize: 256
+        Timeout: 10
