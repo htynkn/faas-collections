@@ -1,5 +1,5 @@
 var request = require("request");
-var async = require("async")
+var async = require("async");
 
 var targets = {
     "htynkn/dubbo-benchmark": "dubbo/dubbo-benchmark",
@@ -7,6 +7,7 @@ var targets = {
     "htynkn/incubator-dubbo": "apache/incubator-dubbo",
     "htynkn/incubator-dubbo-ops": "apache/incubator-dubbo-ops",
     "htynkn/spring-boot": "spring-projects/spring-boot",
+    "htynkn/fun": "aliyun/fun",
 };
 
 module.exports.handler = function (event, context, callback) {
