@@ -1,7 +1,7 @@
 var folderName = process.argv[2];
 console.log('Start processing '+ folderName)
 
-var envList = ["GITHUB_TOKEN"]
+var envList = ["GITHUB_TOKEN", "DINGDING_TOKEN"]
 console.log('Replacing env config in template file')
 
 var fs = require('fs')

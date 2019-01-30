@@ -13,3 +13,12 @@ Resources:
         CodeUri: './target/housing-notify-1.0-SNAPSHOT-jar-with-dependencies.jar'
         MemorySize: 256
         Timeout: 10
+        EnvironmentVariables:
+          'DINGDING_TOKEN': 'env[DINGDING_TOKEN]'
+      Events:
+        TmTrigger:
+          Type: Timer
+          Properties:
+            Payload: "timer"
+            CronExpression: "0 0-12/4 * * *"
+            Enable: true
