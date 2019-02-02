@@ -8,6 +8,7 @@ var targets = {
     "htynkn/incubator-dubbo-ops": "apache/incubator-dubbo-ops",
     "htynkn/spring-boot": "spring-projects/spring-boot",
     "htynkn/fun": "aliyun/fun",
+    "htynkn/incubator-openwhisk": "apache/incubator-openwhisk",
 };
 
 module.exports.handler = function (event, context, callback) {
