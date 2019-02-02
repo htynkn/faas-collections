@@ -8,3 +8,4 @@ before_script:
 script:
   - ./deploy.sh update-forked-repo
   - ./deploy.sh housing-notify
+  - ./deploy.sh trigger-jitpack

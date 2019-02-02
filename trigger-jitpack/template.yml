@@ -1,0 +1,21 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  trigger-jitpack:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: 'helloworld'
+    trigger-jitpack:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: com.huangyunkun.faas.App::handleRequest
+        Runtime: java8
+        CodeUri: './target/trigger-jitpack-1.0-SNAPSHOT-jar-with-dependencies.jar'
+        Timeout: 5
+      Events:
+        TmTrigger:
+          Type: Timer
+          Properties:
+            Payload: "timer"
+            CronExpression: "0 0 0 1/3 * *"
+            Enable: true
