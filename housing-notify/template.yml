@@ -20,5 +20,5 @@ Resources:
           Type: Timer
           Properties:
             Payload: "timer"
-            CronExpression: "0 0-12/4 * * *"
+            CronExpression: "0 0 0-12/4 * * *"
             Enable: true
