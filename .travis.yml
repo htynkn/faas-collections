@@ -6,6 +6,4 @@ before_script:
   - npm install -g @alicloud/fun
 
 script:
-  - ./deploy.sh update-forked-repo
-  - ./deploy.sh housing-notify
-  - ./deploy.sh trigger-jitpack
+  - groovy deploy.groovy
