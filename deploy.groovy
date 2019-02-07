@@ -131,7 +131,7 @@ try {
             for (String folderNeedDeploy : foldersNeedDeploy) {
                 System.out.println("Start deploy folder: " + folderNeedDeploy);
 
-                ProcessBuilder pb = new ProcessBuilder("./deploy.sh " + folderNeedDeploy);
+                ProcessBuilder pb = new ProcessBuilder(["./deploy.sh", folderNeedDeploy]);
                 pb.inheritIO();
                 Process p = pb.start();
 
