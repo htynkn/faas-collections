@@ -14,14 +14,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class App implements StreamRequestHandler {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
-
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
         List<String> projectList = Lists.newArrayList("apache/incubator-dubbo",
-                "apache/incubator-dubbo-ops",
+                "apache/incubator-dubbo",
                 "Var3D/var3dframe"
         );
 
