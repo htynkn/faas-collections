@@ -2,13 +2,10 @@ var request = require("request");
 var async = require("async");
 
 var targets = {
-    "htynkn/dubbo-benchmark": "dubbo/dubbo-benchmark",
     "htynkn/spark": "apache/spark",
-    "htynkn/incubator-dubbo": "apache/incubator-dubbo",
-    "htynkn/incubator-dubbo-ops": "apache/incubator-dubbo-ops",
+    "htynkn/dubbo": "apache/dubbo",
     "htynkn/spring-boot": "spring-projects/spring-boot",
-    "htynkn/fun": "aliyun/fun",
-    "htynkn/incubator-openwhisk": "apache/incubator-openwhisk",
+    "htynkn/fun": "aliyun/fun"
 };
 
 module.exports.handler = function (event, context, callback) {
