@@ -1,7 +1,15 @@
 var request = require("request");
 var async = require("async");
 
-var targets = ["htynkn/spark"];
+var targets = [
+  "htynkn/spark",
+  "htynkn/fun",
+  "htynkn/rpc-benchmark",
+  "htynkn/spring-boot",
+  "htynkn/dubbo",
+  "htynkn/dubbo-admin",
+  "htynkn/dubbo-samples"
+];
 
 module.exports.handler = function(event, context, callback) {
   var options = {
@@ -26,19 +34,19 @@ module.exports.handler = function(event, context, callback) {
                 }
                 const responseAsJson = JSON.parse(body);
                 var defaultBranch = responseAsJson.default_branch;
-                if (response.parent != null) {
+                if (responseAsJson.parent != null) {
                   var parentName = responseAsJson.parent.full_name;
                   cb(null, {
                     defaultBranch: defaultBranch,
                     parentName: parentName
                   });
+                } else {
+                  cb("No parent, skip");
                 }
-                cb("No parent, skip");
               }
             );
           },
           function(info, cb) {
-            console.log(info);
             request.get(
               "https://api.github.com/repos/" +
                 info.parentName +
@@ -48,12 +56,13 @@ module.exports.handler = function(event, context, callback) {
               function(error, response, body) {
                 if (error) {
                   cb(error);
+                } else {
+                  var sha = JSON.parse(body).commit.sha;
+                  cb(null, {
+                    defaultBranch: info.defaultBranch,
+                    sha: sha
+                  });
                 }
-                var sha = JSON.parse(body).commit.sha;
-                cb(null, {
-                  defaultBranch: info.defaultBranch,
-                  sha: sha
-                });
               }
             );
           },
