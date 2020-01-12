@@ -1,0 +1,28 @@
+name: update-forked-repo deploy
+
+on:
+  push:
+    paths:
+      - "update-forked-repo/**"
+      - ".github/**"
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "8.x"
+      - run: cd update-forked-repo && npm install
+      - uses: htynkn/aliyun-serverless-action@v1.0.0
+        env:
+          ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+          REGION: cn-shanghai
+          ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
+        with:
+          functionFolder: update-forked-repo/
