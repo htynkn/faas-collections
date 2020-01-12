@@ -13,7 +13,7 @@ Resources:
         CodeUri: './'
         Timeout: 20
         EnvironmentVariables:
-          'GITHUB_TOKEN': 'env[GITHUB_TOKEN]'
+          'GITHUB_TOKEN': 'CUSTOM_GITHUB_TOKEN'
       Events:
         TmTrigger:
           Type: Timer

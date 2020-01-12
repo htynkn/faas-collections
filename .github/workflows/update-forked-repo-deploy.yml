@@ -18,7 +18,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@0.1.1
         with:
           include: "template.yml"
-          find: "env[GITHUB_TOKEN]"
+          find: "CUSTOM_GITHUB_TOKEN"
           replace: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
       - uses: actions/setup-node@v1
         with:
