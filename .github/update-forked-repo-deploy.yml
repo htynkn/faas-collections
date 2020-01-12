@@ -2,9 +2,6 @@ name: update-forked-repo deploy
 
 on:
   push:
-    paths:
-      - "update-forked-repo/**"
-      - ".github/**"
     branches:
       - master
 
