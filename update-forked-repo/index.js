@@ -3,12 +3,12 @@ var async = require("async");
 
 var targets = [
   "htynkn/spark",
-  "htynkn/fun",
   "htynkn/rpc-benchmark",
   "htynkn/spring-boot",
   "htynkn/dubbo",
   "htynkn/dubbo-admin",
-  "htynkn/dubbo-samples"
+  "htynkn/dubbo-samples",
+  "htynkn/fish-redux"
 ];
 
 module.exports.handler = function(event, context, callback) {
