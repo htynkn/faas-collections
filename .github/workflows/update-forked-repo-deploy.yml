@@ -1,10 +1,10 @@
 name: update-forked-repo deploy
 
 on:
-  paths:
-    - "update-forked-repo/**"
-    - ".github/**"
   push:
+    paths:
+      - "update-forked-repo/**"
+      - ".github/**"
     branches:
       - master
 
