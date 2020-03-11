@@ -8,6 +8,7 @@ var targets = [
   "htynkn/dubbo",
   "htynkn/dubbo-admin",
   "htynkn/dubbo-samples",
+  "htynkn/dubbo-go",
   "htynkn/fish-redux"
 ];
 
