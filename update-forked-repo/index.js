@@ -1,35 +1,26 @@
 var request = require("request");
 var async = require("async");
 
-var targets = [
-  "htynkn/spark",
-  "htynkn/rpc-benchmark",
-  "htynkn/spring-boot",
-  "htynkn/dubbo",
-  "htynkn/dubbo-admin",
-  "htynkn/dubbo-samples",
-  "htynkn/dubbo-go",
-  "htynkn/fish-redux"
-];
+var targets = ["htynkn/spring-boot", "htynkn/dubbo", "htynkn/dubbo-samples"];
 
-module.exports.handler = function(event, context, callback) {
+module.exports.handler = function (event, context, callback) {
   var options = {
     headers: {
       "User-Agent": "update-forked-repo",
-      Authorization: "token " + process.env.GITHUB_TOKEN
-    }
+      Authorization: "token " + process.env.GITHUB_TOKEN,
+    },
   };
   var execResult = [];
   async.each(
     targets,
-    function(value, eachCallback) {
+    function (value, eachCallback) {
       async.waterfall(
         [
-          function(cb) {
+          function (cb) {
             request.get(
               "https://api.github.com/repos/" + value,
               options,
-              function(error, response, body) {
+              function (error, response, body) {
                 if (error) {
                   cb(error);
                 }
@@ -39,7 +30,7 @@ module.exports.handler = function(event, context, callback) {
                   var parentName = responseAsJson.parent.full_name;
                   cb(null, {
                     defaultBranch: defaultBranch,
-                    parentName: parentName
+                    parentName: parentName,
                   });
                 } else {
                   cb("No parent, skip");
@@ -47,27 +38,27 @@ module.exports.handler = function(event, context, callback) {
               }
             );
           },
-          function(info, cb) {
+          function (info, cb) {
             request.get(
               "https://api.github.com/repos/" +
                 info.parentName +
                 "/branches/" +
                 info.defaultBranch,
               options,
-              function(error, response, body) {
+              function (error, response, body) {
                 if (error) {
                   cb(error);
                 } else {
                   var sha = JSON.parse(body).commit.sha;
                   cb(null, {
                     defaultBranch: info.defaultBranch,
-                    sha: sha
+                    sha: sha,
                   });
                 }
               }
             );
           },
-          function(info, cb) {
+          function (info, cb) {
             request.patch(
               "https://api.github.com/repos/" +
                 value +
@@ -77,33 +68,33 @@ module.exports.handler = function(event, context, callback) {
                 headers: options.headers,
                 json: {
                   sha: info.sha,
-                  force: false
-                }
+                  force: false,
+                },
               },
-              function(error, response, body) {
+              function (error, response, body) {
                 if (error) {
                   cb(error);
                 }
                 cb(null, body);
               }
             );
-          }
+          },
         ],
-        function(err, result) {
+        function (err, result) {
           if (err) {
             eachCallback(err);
           } else {
             execResult.push({
               target: value,
               time: new Date(),
-              result: result.object
+              result: result.object,
             });
             eachCallback();
           }
         }
       );
     },
-    function(err) {
+    function (err) {
       if (err) {
         callback(err);
       } else {

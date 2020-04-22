@@ -27,7 +27,7 @@ jobs:
       - uses: htynkn/aliyun-serverless-action@v1.0.0
         env:
           ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
-          REGION: cn-shanghai
+          REGION: cn-hongkong
           ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
           ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
         with:
