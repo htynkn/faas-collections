@@ -1,7 +1,7 @@
 var request = require("request");
 var async = require("async");
 
-var targets = ["htynkn/spring-boot", "htynkn/dubbo", "htynkn/dubbo-samples","htynkn/slp-server-rust","htynkn/dubbo-admin"];
+var targets = ["htynkn/spring-boot", "htynkn/dubbo", "htynkn/dubbo-samples","htynkn/dubbo-admin"];
 
 module.exports.handler = function (event, context, callback) {
   var options = {
