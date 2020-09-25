@@ -1,0 +1,8 @@
+build-image
+.env
+evt
+main.go
+go.mod
+go.sum
+
+.fun
