@@ -21,7 +21,7 @@ jobs:
           find: "CUSTOM_GITHUB_TOKEN"
           replace: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
       - run: cd update-forked-repo-golang && make build
-      - uses: htynkn/aliyun-serverless-action@v1.0.0
+      - uses: htynkn/aliyun-serverless-action@v1.0.2
         env:
           ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
           REGION: cn-hongkong
