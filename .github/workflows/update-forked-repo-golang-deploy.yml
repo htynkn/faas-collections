@@ -1,0 +1,31 @@
+name: update-forked-repo deploy
+
+on:
+  push:
+    paths:
+      - "update-forked-repo-golang/**"
+      - ".github/**"
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: inject token to serverless config files
+        uses: jacobtomlinson/gha-find-replace@0.1.1
+        with:
+          include: "template.yml"
+          find: "CUSTOM_GITHUB_TOKEN"
+          replace: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+      - run: cd update-forked-repo-golang && make build
+      - uses: htynkn/aliyun-serverless-action@v1.0.0
+        env:
+          ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+          REGION: cn-hongkong
+          ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
+        with:
+          functionFolder: update-forked-repo-golang/
