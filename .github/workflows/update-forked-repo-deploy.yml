@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "update-forked-repo/**"
-      - ".github/**"
+      - ".github/workflows/update-forked-repo-deploy.yml"
     branches:
       - master
 
