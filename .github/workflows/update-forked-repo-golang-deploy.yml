@@ -1,10 +1,10 @@
-name: update-forked-repo deploy
+name: update-forked-repo-golang deploy
 
 on:
   push:
     paths:
       - "update-forked-repo-golang/**"
-      - ".github/**"
+      - ".github/workflows/update-forked-repo-golang-deploy.yml"
     branches:
       - master
 
