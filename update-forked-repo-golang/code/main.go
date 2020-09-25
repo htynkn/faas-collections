@@ -20,14 +20,22 @@ func handler(ctx *gr.FCContext, event []byte) ([]byte, error) {
 	githubToken, _ := os.LookupEnv("GITHUB_TOKEN")
 	fcLogger.Infof(githubToken)
 
-	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: githubToken},
 	)
-	tc := oauth2.NewClient(ctx, ts)
+	context := context.Background()
+	tc := oauth2.NewClient(context, ts)
 	client := github.NewClient(tc)
 
-	fcLogger.Infof("hello golang!")
+	repos, _, err := client.Repositories.ListAll(context, &github.RepositoryListAllOptions{})
+
+	for _, value := range repos {
+		if value.Parent != nil {
+			fcLogger.Infof(*value.Parent.FullName)
+		}
+	}
+
+	fcLogger.Infof("client is ready")
 	return event, nil
 }
 
