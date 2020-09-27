@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"os"
 
 	gr "github.com/awesome-fc/golang-runtime"
@@ -27,11 +28,43 @@ func handler(ctx *gr.FCContext, event []byte) ([]byte, error) {
 	tc := oauth2.NewClient(context, ts)
 	client := github.NewClient(tc)
 
-	repos, _, err := client.Repositories.ListAll(context, &github.RepositoryListAllOptions{})
+	var repos = [...]string{"spring-boot", "dubbo",
+		"dubbo-admin", "htynkn/nacos",
+		"spring-framework", "spring-boot",
+	}
 
 	for _, value := range repos {
-		if value.Parent != nil {
-			fcLogger.Infof(*value.Parent.FullName)
+		repo, _, err := client.Repositories.Get(context, "htynkn", value)
+
+		if err != nil {
+			fcLogger.Errorf("fail to call github api")
+		}
+
+		if repo.GetParent() != nil {
+			fcLogger.Infof("find parent for %s as %s", repo.GetName(), repo.GetParent().GetFullName())
+
+			prepo, _, err := client.Repositories.GetBranch(context, repo.GetParent().GetOwner().GetLogin(), repo.GetParent().GetName(), repo.GetDefaultBranch())
+
+			if err != nil {
+				fcLogger.Errorf("fail to call github api")
+			}
+
+			targetSha := prepo.GetCommit().GetSHA()
+
+			fcLogger.Infof("find target sha for %s as %s", repo.GetFullName(), targetSha)
+
+			ref := fmt.Sprintf("refs/heads/%s", repo.GetDefaultBranch())
+
+			client.Git.UpdateRef(context, "htynkn", repo.GetName(), &github.Reference{
+				Ref: &ref,
+				Object: &github.GitObject{
+					SHA: &targetSha,
+				},
+			}, true)
+
+			fcLogger.Infof("update ref success for %s with %s", repo.GetFullName(), targetSha)
+		} else {
+			fcLogger.Infof("skip repo %s because of no parent repo", repo.GetFullName())
 		}
 	}
 
