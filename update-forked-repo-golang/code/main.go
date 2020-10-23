@@ -29,8 +29,8 @@ func handler(ctx *gr.FCContext, event []byte) ([]byte, error) {
 	client := github.NewClient(tc)
 
 	var repos = [...]string{"spring-boot", "dubbo",
-		"dubbo-admin", "htynkn/nacos",
-		"spring-framework", "spring-boot",
+		"dubbo-admin", "nacos",
+		"spring-framework", "spring-boot","ns-usbloader-mobile",
 	}
 
 	for _, value := range repos {
