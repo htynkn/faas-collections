@@ -30,7 +30,7 @@ func handler(ctx *gr.FCContext, event []byte) ([]byte, error) {
 
 	var repos = [...]string{"spring-boot", "dubbo",
 		"dubbo-admin", "nacos",
-		"spring-framework", "spring-boot","ns-usbloader-mobile",
+		"spring-framework", "spring-boot","dubbo-website","dubbo-samples",
 	}
 
 	for _, value := range repos {
