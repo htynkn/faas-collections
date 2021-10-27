@@ -1,0 +1,31 @@
+name: update-forked-repo-rust deploy
+
+on:
+  push:
+    paths:
+      - "update-forked-repo-rust/**"
+      - ".github/workflows/update-forked-repo-rust-deploy.yml"
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: inject token to serverless config files
+        uses: jacobtomlinson/gha-find-replace@0.1.1
+        with:
+          include: "template.yml"
+          find: "CUSTOM_GITHUB_TOKEN"
+          replace: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+      - run: cd update-forked-repo-rust && make build
+      - uses: htynkn/aliyun-serverless-action@v1.0.2
+        env:
+          ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+          REGION: cn-hongkong
+          ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
+        with:
+          functionFolder: update-forked-repo-rust/
