@@ -8,7 +8,7 @@ Resources:
     update-forked-repo-rust:
       Type: "Aliyun::Serverless::Function"
       Properties:
-        Handler: main.handler
+        Handler: index.handler
         Runtime: custom
         CodeUri: "./code"
         Timeout: 20
